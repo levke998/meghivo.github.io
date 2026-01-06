@@ -1,2 +1,366 @@
-# meghivo.github.io
-meghivo
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Meghívó Neked ❤️</title>
+  <style>
+    :root{
+      --bg1:#0f172a;
+      --bg2:#1e293b;
+      --card:#0b1220cc;
+      --stroke:#ffffff22;
+      --text:#e5e7eb;
+      --muted:#cbd5e1;
+      --accent:#f472b6; /* rózsaszín */
+      --accent2:#60a5fa; /* kék */
+      --ok:#34d399;
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% 10%, rgba(244,114,182,.25), transparent 55%),
+        radial-gradient(1000px 600px at 90% 20%, rgba(96,165,250,.22), transparent 60%),
+        radial-gradient(900px 600px at 50% 90%, rgba(52,211,153,.14), transparent 60%),
+        linear-gradient(160deg, var(--bg1), var(--bg2));
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+
+    .wrap{
+      width:min(980px, 100%);
+    }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+      border:1px solid var(--stroke);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    header{
+      padding:28px 26px 18px;
+      position:relative;
+    }
+
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:8px 12px;
+      border:1px solid var(--stroke);
+      border-radius: 999px;
+      background: rgba(0,0,0,.15);
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing:.2px;
+    }
+
+    h1{
+      margin:14px 0 8px;
+      font-size: clamp(26px, 4vw, 38px);
+      line-height: 1.1;
+    }
+
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size: 15px;
+      line-height:1.6;
+      max-width: 70ch;
+    }
+
+    .heartline{
+      height:1px;
+      background: linear-gradient(90deg, transparent, rgba(244,114,182,.8), rgba(96,165,250,.7), transparent);
+      margin: 0 26px;
+    }
+
+    main{
+      padding:22px 26px 26px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:14px;
+      margin-top: 16px;
+    }
+
+    .option{
+      grid-column: span 12;
+      border:1px solid var(--stroke);
+      border-radius: 16px;
+      padding:16px 16px 14px;
+      background: rgba(11,18,32,.55);
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+    }
+    .option:hover{
+      transform: translateY(-2px);
+      border-color: rgba(244,114,182,.35);
+      background: rgba(11,18,32,.70);
+    }
+
+    .optTitle{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin:0 0 6px;
+    }
+    .optTitle strong{
+      font-size: 16px;
+      letter-spacing:.2px;
+    }
+    .pill{
+      font-size:12px;
+      color: var(--muted);
+      border:1px solid var(--stroke);
+      padding:6px 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.12);
+      white-space:nowrap;
+    }
+
+    .desc{
+      margin:0;
+      color: var(--muted);
+      font-size:14px;
+      line-height:1.55;
+    }
+
+    .tiny{
+      margin-top:10px;
+      font-size:12.5px;
+      color: rgba(226,232,240,.9);
+    }
+
+    .cozy{
+      margin-top: 14px;
+      padding: 14px 14px 12px;
+      border-radius: 16px;
+      border:1px dashed rgba(244,114,182,.45);
+      background: rgba(244,114,182,.08);
+    }
+    .cozy strong{ color: #ffd1e8; }
+
+    .footer{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+      padding:16px 26px 22px;
+    }
+
+    .buttons{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    button{
+      cursor:pointer;
+      border:1px solid var(--stroke);
+      background: rgba(0,0,0,.18);
+      color: var(--text);
+      padding:10px 12px;
+      border-radius: 12px;
+      font-size: 14px;
+      transition: transform .12s ease, border-color .12s ease;
+    }
+    button:hover{
+      transform: translateY(-1px);
+      border-color: rgba(96,165,250,.45);
+    }
+
+    .primary{
+      border-color: rgba(244,114,182,.45);
+      background: linear-gradient(135deg, rgba(244,114,182,.22), rgba(96,165,250,.16));
+    }
+
+    .note{
+      color: var(--muted);
+      font-size: 13px;
+      line-height:1.5;
+      max-width: 62ch;
+    }
+
+    /* 2 oszlop nagyobb képernyőn */
+    @media (min-width: 760px){
+      .option{ grid-column: span 6; }
+    }
+
+    /* kis “csillagok” */
+    .sparkle{
+      position:absolute;
+      inset:-40px -40px auto auto;
+      width: 180px;
+      height: 180px;
+      filter: blur(0.2px);
+      opacity:.55;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 20% 25%, rgba(255,255,255,.55) 0 2px, transparent 3px),
+        radial-gradient(circle at 60% 35%, rgba(255,255,255,.35) 0 2px, transparent 3px),
+        radial-gradient(circle at 35% 70%, rgba(255,255,255,.30) 0 2px, transparent 3px),
+        radial-gradient(circle at 80% 75%, rgba(255,255,255,.25) 0 2px, transparent 3px);
+    }
+
+    .selected{
+      border-color: rgba(52,211,153,.55) !important;
+      background: rgba(52,211,153,.08) !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+      <header>
+        <div class="sparkle"></div>
+        <div class="tag">🕊️ Meghívó — nyomás nélkül, csak szeretettel</div>
+        <h1>Szeretnék Veled egy nyugodt, szép estét… ❤️</h1>
+        <p class="sub">
+          Tudom, hogy most nehéz napok vannak. Nem kell semmit bizonyítanod és nem kell “erősnek” lenned.
+          Csak azt szeretném, hogy legyen egy kis béke — <b>pont úgy, ahogy Neked jó</b>.
+        </p>
+      </header>
+
+      <div class="heartline"></div>
+
+      <main>
+        <p class="sub" style="margin-top:0">
+          Válassz egyet (vagy mondj egy teljesen más ötletet). Én alkalmazkodom. 😊
+        </p>
+
+        <div class="grid" id="grid">
+          <div class="option" data-key="mom">
+            <div class="optTitle">
+              <strong>1) Anyukád meglátogatása</strong>
+              <span class="pill">ha van hozzá kedved</span>
+            </div>
+            <p class="desc">
+              Röviden, nyugisan. Egy kávé/tea, pár kedves szó — semmi erőltetés.
+            </p>
+            <div class="tiny">🌿 Opció: ha most inkább pihennél, teljesen megértem.</div>
+          </div>
+
+          <div class="option" data-key="home">
+            <div class="optTitle">
+              <strong>2) Nálunk: fények + forralt bor + kandalló</strong>
+              <span class="pill">meleg & kuckós</span>
+            </div>
+            <p class="desc">
+              Egy séta karácsonyi fények között, aztán kuckózás. Ha úgy érzed, bemutatkozás is lehet,
+              de <b>csak ha te is akarod</b>.
+            </p>
+            <div class="tiny">🔥 Ha az “ismerkedés” most stressz, akkor ezt inkább későbbre tesszük.</div>
+          </div>
+
+          <div class="option" data-key="szolnok">
+            <div class="optTitle">
+              <strong>3) Szolnok: csak mi ketten</strong>
+              <span class="pill">csend & nyugi</span>
+            </div>
+            <p class="desc">
+              Semmi külső zaj. Egy kis séta, tea/kávé, beszélgetés — amennyi jól esik.
+            </p>
+            <div class="tiny">🕯️ “Menekülős” napokra szerintem ez a leglágyabb.</div>
+          </div>
+
+          <div class="option" data-key="day">
+            <div class="optTitle">
+              <strong>4) Egy egész nap együtt valahol</strong>
+              <span class="pill">rugalmas</span>
+            </div>
+            <p class="desc">
+              Kitaláljuk közösen: rövidebb programok, meleg helyek, sok “bármikor hazamehetünk”.
+              Nem kell fázni: lehet beltéri is.
+            </p>
+            <div class="tiny">☕ Ha hideg van, csinálunk “meleg útvonalat”.</div>
+          </div>
+        </div>
+
+        <div class="cozy">
+          <p class="desc" style="margin:0">
+            <strong>+ Egy extra, ha jólesik:</strong> ha úgy érzed, alhatunk is együtt… csak ölelés, béke,
+            semmi nyomás. 🫶
+          </p>
+        </div>
+
+        <p class="note" style="margin-top:16px">
+          Ha most csak annyit mondasz: “ma nem bírom” — az is rendben van.
+          Akkor is itt vagyok, és majd csinálunk egy szebb napot. 🌙
+        </p>
+      </main>
+
+      <div class="heartline"></div>
+
+      <div class="footer">
+        <div class="buttons">
+          <button class="primary" id="copyBtn">📋 Választás kimásolása</button>
+          <button id="resetBtn">↩️ Nincs döntés most</button>
+        </div>
+        <div class="note">
+          Tipp: kattints egy opcióra, aztán “Választás kimásolása” — és be tudod küldeni üzenetben.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const options = document.querySelectorAll(".option");
+    let selectedKey = null;
+
+    const labels = {
+      mom: "1) Anyukád meglátogatása",
+      home: "2) Nálunk: fények + forralt bor + kandalló",
+      szolnok: "3) Szolnok: csak mi ketten",
+      day: "4) Egy egész nap együtt valahol"
+    };
+
+    function setSelected(key){
+      selectedKey = key;
+      options.forEach(o => o.classList.toggle("selected", o.dataset.key === key));
+    }
+
+    options.forEach(o => {
+      o.addEventListener("click", () => setSelected(o.dataset.key));
+    });
+
+    document.getElementById("resetBtn").addEventListener("click", () => {
+      selectedKey = null;
+      options.forEach(o => o.classList.remove("selected"));
+      alert("Rendben. Nincs döntés most — csak szeretet. 🤍");
+    });
+
+    document.getElementById("copyBtn").addEventListener("click", async () => {
+      const intro = "Szia ❤️\nNem akarok semmit erőltetni. Csak szeretném, ha lenne egy kis békéd velem.\n";
+      const pick = selectedKey ? ("Választásom: " + labels[selectedKey] + "\n") : "Választásom: bármi, ami neked a legkönnyebb.\n";
+      const cozy = "\n+ Ha jólesik: aludhatunk is együtt, csak ölelés és nyugi, semmi nyomás. 🫶\n";
+      const outro = "\nHa most pihennél inkább, az is teljesen oké. Itt vagyok. 🌙";
+
+      const text = intro + pick + cozy + outro;
+
+      try{
+        await navigator.clipboard.writeText(text);
+        alert("Kimásolva! Küldheted neki üzenetben. 😊");
+      }catch(e){
+        // fallback
+        prompt("Másold ki innen:", text);
+      }
+    });
+  </script>
+</body>
+</html>
