@@ -466,20 +466,29 @@
     });
 
     document.getElementById("copyBtn").addEventListener("click", async () => {
-      const intro = "Szia ❤️\n";
-      const pick = selectedKey ? ("Választásom: " + labels[selectedKey] + "\n") : "Választásom: bármi, ami neked a legkönnyebb.\n";
-      const cozy = "\n+ Ha jólesik: aludhatunk is együtt, csak ölelés és nyugi, semmi nyomás. 🫶\n";
-      const outro = "\nHa most pihennél inkább, az is teljesen oké. Itt vagyok. 🌙";
+      let text = "Szia ❤️\n\n";
 
-      const text = intro + pick + cozy + outro;
+      if (selectedKey) {
+    // Van konkrét választás
+        text += "Választásom: " + labels[selectedKey] + "\n";
 
-      try{
+        text += "\n+ Ha jólesik: aludhatunk is együtt, csak ölelés és nyugi, semmi nyomás. 🫶";
+      } else {
+    // Nincs döntés
+        text += "Most nincs konkrét döntésem.\n";
+        text += "Bármi jó, ami neked a legkönnyebb.\n";
+      }
+
+      text += "\n\nItt vagyok. 🌙";
+
+      try {
         await navigator.clipboard.writeText(text);
         alert("Kimásolva! Küldheted neki üzenetben. 😊");
-      }catch(e){
+      } catch (e) {
         prompt("Másold ki innen:", text);
       }
     });
+
   </script>
 </body>
 </html>
