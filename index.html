@@ -456,6 +456,25 @@
       day: "4) Egy egész nap együtt valahol"
     };
 
+    let extraSelected = false;
+
+    const extraEl = document.getElementById("extraOption");
+    const extraPill = document.getElementById("extraPill");
+    const extraHint = document.getElementById("extraHint");
+
+    extraEl.addEventListener("click", () => {
+      extraSelected = !extraSelected;
+      extraEl.classList.toggle("selected", extraSelected);
+
+      if (extraSelected) {
+        extraPill.textContent = "kiválasztva ✅";
+        extraHint.textContent = "Benne lesz a másolt üzenetben.";
+      } else {
+        extraPill.textContent = "opcionális";
+        extraHint.textContent = "Kattints ide, ha szeretnéd ezt is beletenni a másolt üzenetbe.";
+      }
+    });
+
     function setSelected(key){
       selectedKey = key;
       options.forEach(o => o.classList.toggle("selected", o.dataset.key === key));
@@ -476,9 +495,13 @@
 
       if (selectedKey) {
     // Van konkrét választás
-        text += "Választásom: " + labels[selectedKey] + "\n";
+        if (selectedKey) {
+          text += "Választásom: " + labels[selectedKey] + "\n";
+        }
 
-        text += "\n+ Ha jólesik: aludhatunk is együtt, csak ölelés és nyugi, semmi nyomás. 🫶";
+        if (extraSelected) {
+          text += "\n+ Ha jólesik: aludhatunk is együtt, csak ölelés és nyugi, semmi nyomás. 🫶";
+        }
       } else {
     // Nincs döntés
         text += "Most nincs konkrét döntésem.\n";
