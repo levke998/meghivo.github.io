@@ -17,6 +17,20 @@
       --ok:#34d399;
       --shadow: 0 18px 60px rgba(0,0,0,.45);
       --radius: 18px;
+      /* Hóesés réteg */
+      #snow{
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        z-index: 1;
+        opacity: .55;
+      }
+
+      /* A kártya legyen a hó felett */
+      .wrap{ position: relative; z-index: 2; }
+
     }
 
     *{ box-sizing:border-box; }
