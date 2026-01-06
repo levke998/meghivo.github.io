@@ -199,6 +199,21 @@
     }
     .cozy strong{ color: #ffd1e8; }
 
+    #extraOption{
+      border:1px dashed rgba(244,114,182,.45);
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+    }
+    #extraOption:hover{
+      transform: translateY(-2px);
+      border-color: rgba(244,114,182,.55);
+      background: rgba(244,114,182,.12);
+    }
+    #extraOption.selected{
+      border-color: rgba(52,211,153,.55) !important;
+      background: rgba(52,211,153,.08) !important;
+    }
+
+    
     .footer{
       display:flex;
       flex-wrap:wrap;
@@ -349,7 +364,7 @@
           </div>
         </div>
 
-        <div class="cozy option" id="extraOption" data-extra="true" style="cursor:pointer;">
+        <div class="cozy" id="extraOption" data-extra="true" style="cursor:pointer;">
           <div class="optTitle" style="margin:0;">
             <strong>+ Egy extra</strong>
             <span class="pill" id="extraPill">opcionális</span>
