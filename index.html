@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Meghívó ❤️</title>
+
   <style>
     :root{
       --bg1:#0f172a;
@@ -17,23 +18,10 @@
       --ok:#34d399;
       --shadow: 0 18px 60px rgba(0,0,0,.45);
       --radius: 18px;
-      /* Hóesés réteg */
-      #snow{
-        position: fixed;
-        inset: 0;
-        width: 100vw;
-        height: 100vh;
-        pointer-events: none;
-        z-index: 1;
-        opacity: .55;
-      }
-
-      /* A kártya legyen a hó felett */
-      .wrap{ position: relative; z-index: 2; }
-
     }
 
     *{ box-sizing:border-box; }
+
     body{
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial;
@@ -50,16 +38,49 @@
       padding:24px;
     }
 
+    /* Hóesés réteg */
+    #snow{
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+      opacity: .55;
+    }
+
+    /* A kártya legyen a hó felett */
     .wrap{
       width:min(980px, 100%);
+      position: relative;
+      z-index: 2;
     }
 
     .card{
+      position: relative;
       background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
       border:1px solid var(--stroke);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow:hidden;
+    }
+
+    /* Meleg fények / glow a kártyán */
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      border-radius: var(--radius);
+      background:
+        radial-gradient(600px 180px at 20% 0%, rgba(244,114,182,.20), transparent 60%),
+        radial-gradient(600px 180px at 80% 0%, rgba(96,165,250,.18), transparent 60%),
+        radial-gradient(500px 220px at 50% 100%, rgba(52,211,153,.10), transparent 65%);
+      pointer-events:none;
+      z-index:0;
+    }
+    .card > *{
+      position: relative;
+      z-index:1;
     }
 
     header{
@@ -239,6 +260,9 @@
 </head>
 
 <body>
+  <!-- Hóesés vászon -->
+  <canvas id="snow" aria-hidden="true"></canvas>
+
   <div class="wrap">
     <div class="card">
       <header>
@@ -335,6 +359,70 @@
   </div>
 
   <script>
+    // --- HÓESÉS (finom, mobilbarát) ---
+    const canvas = document.getElementById("snow");
+    const ctx = canvas.getContext("2d");
+
+    let w, h, dpr;
+    function resize(){
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas.width = Math.floor(w * dpr);
+      canvas.height = Math.floor(h * dpr);
+      canvas.style.width = w + "px";
+      canvas.style.height = h + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    window.addEventListener("resize", resize, { passive: true });
+    resize();
+
+    const flakes = [];
+    function rand(min, max){ return Math.random() * (max - min) + min; }
+
+    function initFlakes(){
+      flakes.length = 0;
+      const count = Math.min(120, Math.floor((w*h)/9000)); // adaptív
+      for(let i=0;i<count;i++){
+        flakes.push({
+          x: rand(0, w),
+          y: rand(0, h),
+          r: rand(0.6, 2.2),
+          vy: rand(0.5, 1.7),
+          vx: rand(-0.35, 0.35),
+          a: rand(0.3, 0.9)
+        });
+      }
+    }
+    initFlakes();
+    window.addEventListener("resize", initFlakes, { passive: true });
+
+    function step(){
+      ctx.clearRect(0,0,w,h);
+      for(const f of flakes){
+        f.x += f.vx;
+        f.y += f.vy;
+
+        // enyhe "sodródás"
+        f.x += Math.sin((f.y / 60)) * 0.15;
+
+        if(f.y > h + 10){
+          f.y = -10;
+          f.x = rand(0, w);
+        }
+        if(f.x < -10) f.x = w + 10;
+        if(f.x > w + 10) f.x = -10;
+
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255,255,255,${f.a})`;
+        ctx.arc(f.x, f.y, f.r, 0, Math.PI*2);
+        ctx.fill();
+      }
+      requestAnimationFrame(step);
+    }
+    step();
+
+    // --- OPciók kiválasztása + másolás ---
     const options = document.querySelectorAll(".option");
     let selectedKey = null;
 
@@ -372,7 +460,6 @@
         await navigator.clipboard.writeText(text);
         alert("Kimásolva! Küldheted neki üzenetben. 😊");
       }catch(e){
-        // fallback
         prompt("Másold ki innen:", text);
       }
     });
