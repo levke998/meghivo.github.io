@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Meghívó Neked ❤️</title>
+  <title>Meghívó ❤️</title>
   <style>
     :root{
       --bg1:#0f172a;
@@ -233,7 +233,7 @@
         <h1>Szeretnék Veled egy nyugodt, szép estét… ❤️</h1>
         <p class="sub">
           Tudom, hogy most nehéz napok vannak. Nem kell semmit bizonyítanod és nem kell “erősnek” lenned.
-          Csak azt szeretném, hogy legyen egy kis béke — <b>pont úgy, ahogy Neked jó</b>.
+          Csak azt szeretném, hogy legyen egy kis béke is benned — <b>pont úgy, ahogy Neked jó</b>.
         </p>
       </header>
 
@@ -247,25 +247,25 @@
         <div class="grid" id="grid">
           <div class="option" data-key="mom">
             <div class="optTitle">
-              <strong>1) Anyukád meglátogatása</strong>
+              <strong>1) Anyukádék meglátogatása</strong>
               <span class="pill">ha van hozzá kedved</span>
             </div>
             <p class="desc">
-              Röviden, nyugisan. Egy kávé/tea, pár kedves szó — semmi erőltetés.
+              Röviden vagy hosszan, nyugisan. Egy kávé/tea, pár kedves szó - vagy több. Együtt, úgy ahogy neked jó.
             </p>
             <div class="tiny">🌿 Opció: ha most inkább pihennél, teljesen megértem.</div>
           </div>
 
           <div class="option" data-key="home">
             <div class="optTitle">
-              <strong>2) Nálunk: fények + forralt bor + kandalló</strong>
+              <strong>2) Miskolc: fények + forralt bor + kandalló + Lillafüred</strong>
               <span class="pill">meleg & kuckós</span>
             </div>
             <p class="desc">
-              Egy séta karácsonyi fények között, aztán kuckózás. Ha úgy érzed, bemutatkozás is lehet,
+              Egy séta karácsonyi fények között, aztán kuckózás. Ha úgy érzed, bemutatkozás is lehet, hiszen anyáék itthon lesznek
               de <b>csak ha te is akarod</b>.
             </p>
-            <div class="tiny">🔥 Ha az “ismerkedés” most stressz, akkor ezt inkább későbbre tesszük.</div>
+            <div class="tiny">🔥 Ha az “ismerkedés” most stressz, akkor ezt inkább későbbre is tehetjük.</div>
           </div>
 
           <div class="option" data-key="szolnok">
@@ -274,19 +274,19 @@
               <span class="pill">csend & nyugi</span>
             </div>
             <p class="desc">
-              Semmi külső zaj. Egy kis séta, tea/kávé, beszélgetés — amennyi jól esik.
+              Semmi külső zaj. Egy kis séta, tea, főzés, beszélgetés — amennyi jól esik.
             </p>
-            <div class="tiny">🕯️ “Menekülős” napokra szerintem ez a leglágyabb.</div>
+            <div class="tiny">🕯️ “Menekülős” napora szerintem ez a leglágyabb.</div>
           </div>
 
           <div class="option" data-key="day">
             <div class="optTitle">
-              <strong>4) Egy egész nap együtt valahol</strong>
+              <strong>4) Egy egész nap együtt valahol, bárhol</strong>
               <span class="pill">rugalmas</span>
             </div>
             <p class="desc">
               Kitaláljuk közösen: rövidebb programok, meleg helyek, sok “bármikor hazamehetünk”.
-              Nem kell fázni: lehet beltéri is.
+              Nem kell fázni: lehet beltéri is. Akár Letiékkel is.
             </p>
             <div class="tiny">☕ Ha hideg van, csinálunk “meleg útvonalat”.</div>
           </div>
@@ -294,13 +294,12 @@
 
         <div class="cozy">
           <p class="desc" style="margin:0">
-            <strong>+ Egy extra, ha jólesik:</strong> ha úgy érzed, alhatunk is együtt… csak ölelés, béke,
-            semmi nyomás. 🫶
+            <strong>+ Egy extra, ha jólesik:</strong> ha úgy érzed, alhatunk is együtt… csak ölelés, csók egymás karjában veszni el. Ahogyan érzed! 🫶
           </p>
         </div>
 
         <p class="note" style="margin-top:16px">
-          Ha most csak annyit mondasz: “ma nem bírom” — az is rendben van.
+          Ha most csak annyit mondasz: “ma nem tudom” — az is rendben van.
           Akkor is itt vagyok, és majd csinálunk egy szebb napot. 🌙
         </p>
       </main>
@@ -324,8 +323,8 @@
     let selectedKey = null;
 
     const labels = {
-      mom: "1) Anyukád meglátogatása",
-      home: "2) Nálunk: fények + forralt bor + kandalló",
+      mom: "1) Anyukádék meglátogatása",
+      home: "2) Miskolc: fények + forralt bor + kandalló",
       szolnok: "3) Szolnok: csak mi ketten",
       day: "4) Egy egész nap együtt valahol"
     };
@@ -346,7 +345,7 @@
     });
 
     document.getElementById("copyBtn").addEventListener("click", async () => {
-      const intro = "Szia ❤️\nNem akarok semmit erőltetni. Csak szeretném, ha lenne egy kis békéd velem.\n";
+      const intro = "Szia ❤️\n";
       const pick = selectedKey ? ("Választásom: " + labels[selectedKey] + "\n") : "Választásom: bármi, ami neked a legkönnyebb.\n";
       const cozy = "\n+ Ha jólesik: aludhatunk is együtt, csak ölelés és nyugi, semmi nyomás. 🫶\n";
       const outro = "\nHa most pihennél inkább, az is teljesen oké. Itt vagyok. 🌙";
