@@ -53,9 +53,20 @@
       height: 100vh;
       pointer-events:none;
       z-index: 1;
-      opacity: .85;
-      mix-blend-mode: screen; /* ettől “fényként” viselkedik */
-      filter: blur(.2px);
+      opacity: 1;                 /* feljebb húzva */
+      mix-blend-mode: screen;
+      filter: blur(0.6px);        /* erősebb glow */
+      animation: bokehBreath 7.5s ease-in-out infinite; /* lélegzik */
+    }
+    @keyframes bokehBreath{
+      0%,100%{
+        transform: scale(1) translate3d(0,0,0);
+        opacity: .95;
+      }
+      50%{
+        transform: scale(1.03) translate3d(0,-6px,0);  /* pici drift */
+        opacity: 1;
+      }
     }
 
     .wrap{
@@ -72,6 +83,11 @@
       box-shadow: var(--shadow);
       overflow: hidden;
       backdrop-filter: blur(12px);
+      animation: cardBreath 9s ease-in-out infinite;
+    }
+    @keyframes cardBreath{
+      0%,100%{ transform: translateY(0); }
+      50%{ transform: translateY(-3px); }
     }
 
     /* ERŐSEBB glow a fő kártyán */
@@ -185,13 +201,34 @@
       position:absolute;
       inset:-2px;
       border-radius: 16px;
+
       background: linear-gradient(90deg,
-        rgba(255,107,138,.35),
-        rgba(255,154,107,.25),
-        rgba(255,211,138,.18));
-      opacity:.55;
-      filter: blur(10px);
+        rgba(255,107,138,.42),
+        rgba(255,154,107,.30),
+        rgba(255,211,138,.22),
+        rgba(255,154,107,.28),
+        rgba(255,107,138,.40));
+
+      opacity:.65;
+      filter: blur(12px);
       pointer-events:none;
+
+  /* LÉLEGZŐ + lassú “folyás” */
+      background-size: 220% 220%;
+      animation: stepGlow 6.5s ease-in-out infinite;
+    }
+
+    @keyframes stepGlow{
+      0%,100%{
+        transform: scale(1);
+        background-position: 0% 50%;
+        opacity: .55;
+      }
+      50%{
+        transform: scale(1.01);
+        background-position: 100% 50%;
+        opacity: .78;
+      }
     }
     .step::after{
       content:"";
@@ -490,6 +527,9 @@
 
     let tick = 0;
     function step(){
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.translate(Math.sin(tick*0.35) * 6, Math.cos(tick*0.28) * 5);
+      
       tick += 0.01;
       ctx.clearRect(0,0,w,h);
 
