@@ -3,407 +3,407 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Meghívó ❤️</title>
+  <title>Meghívó 💗</title>
 
   <style>
     :root{
-      --bg1:#0f172a;
-      --bg2:#1e293b;
-      --card:#0b1220cc;
-      --stroke:#ffffff22;
-      --text:#e5e7eb;
-      --muted:#cbd5e1;
-      --accent:#f472b6; /* rózsaszín */
-      --accent2:#60a5fa; /* kék */
-      --ok:#34d399;
-      --shadow: 0 18px 60px rgba(0,0,0,.45);
-      --radius: 18px;
+      /* meleg, barackos-rózsás paletta */
+      --bg1:#fff1ea;
+      --bg2:#ffd7c7;
+      --bg3:#f7b2a1;
+      --ink:#3b1d1d;
+      --muted:#6b2c2c;
+      --card: rgba(255,255,255,.55);
+      --stroke: rgba(255,255,255,.45);
+      --shadow: 0 24px 80px rgba(84,18,18,.25);
+      --radius: 22px;
+
+      --accent:#ff6b8a;
+      --accent2:#ff9a6b;
+      --accent3:#ffd38a;
+
+      --ok:#22c55e;
     }
 
     *{ box-sizing:border-box; }
 
     body{
       margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial;
-      color:var(--text);
-      background:
-        radial-gradient(1200px 600px at 10% 10%, rgba(244,114,182,.25), transparent 55%),
-        radial-gradient(1000px 600px at 90% 20%, rgba(96,165,250,.22), transparent 60%),
-        radial-gradient(900px 600px at 50% 90%, rgba(52,211,153,.14), transparent 60%),
-        linear-gradient(160deg, var(--bg1), var(--bg2));
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial;
+      color: var(--ink);
       min-height:100vh;
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:24px;
+      padding: 24px;
+
+      background:
+        radial-gradient(900px 520px at 15% 10%, rgba(255,107,138,.20), transparent 60%),
+        radial-gradient(900px 520px at 85% 15%, rgba(255,154,107,.20), transparent 60%),
+        radial-gradient(1100px 620px at 50% 95%, rgba(255,211,138,.18), transparent 60%),
+        linear-gradient(160deg, var(--bg1), var(--bg2) 45%, var(--bg3));
     }
 
-    /* Hóesés réteg */
-    #snow{
+    /* csillogós bokeh réteg */
+    #bokeh{
       position: fixed;
       inset: 0;
       width: 100vw;
       height: 100vh;
-      pointer-events: none;
+      pointer-events:none;
       z-index: 1;
-      opacity: .55;
+      opacity: .75;
     }
 
-    /* A kártya legyen a hó felett */
     .wrap{
-      width:min(980px, 100%);
+      width: min(980px, 100%);
       position: relative;
       z-index: 2;
     }
 
     .card{
       position: relative;
-      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
-      border:1px solid var(--stroke);
       border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.62), rgba(255,255,255,.36));
+      border: 1px solid rgba(255,255,255,.55);
       box-shadow: var(--shadow);
-      overflow:hidden;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
     }
 
-    /* Meleg fények / glow a kártyán */
+    /* glow a kártya körül */
     .card::before{
       content:"";
       position:absolute;
       inset:-2px;
       border-radius: var(--radius);
       background:
-        radial-gradient(600px 180px at 20% 0%, rgba(244,114,182,.20), transparent 60%),
-        radial-gradient(600px 180px at 80% 0%, rgba(96,165,250,.18), transparent 60%),
-        radial-gradient(500px 220px at 50% 100%, rgba(52,211,153,.10), transparent 65%);
+        radial-gradient(700px 220px at 20% 0%, rgba(255,107,138,.26), transparent 62%),
+        radial-gradient(700px 220px at 80% 0%, rgba(255,154,107,.22), transparent 62%),
+        radial-gradient(700px 260px at 50% 110%, rgba(255,211,138,.18), transparent 60%);
+      filter: blur(0.2px);
       pointer-events:none;
       z-index:0;
     }
-    .card > *{
-      position: relative;
-      z-index:1;
-    }
+    .card > *{ position: relative; z-index:1; }
 
     header{
-      padding:28px 26px 18px;
-      position:relative;
+      padding: 30px 28px 18px;
+      position: relative;
     }
 
     .tag{
       display:inline-flex;
       align-items:center;
       gap:10px;
-      padding:8px 12px;
-      border:1px solid var(--stroke);
+      padding: 8px 12px;
       border-radius: 999px;
-      background: rgba(0,0,0,.15);
-      color: var(--muted);
+      border:1px solid rgba(255,255,255,.55);
+      background: rgba(255,255,255,.40);
       font-size: 13px;
+      color: rgba(107,44,44,.95);
       letter-spacing:.2px;
+      box-shadow: 0 10px 26px rgba(84,18,18,.08);
     }
 
     h1{
-      margin:14px 0 8px;
-      font-size: clamp(26px, 4vw, 38px);
-      line-height: 1.1;
+      margin: 14px 0 10px;
+      font-size: clamp(26px, 4.2vw, 40px);
+      line-height: 1.12;
       letter-spacing: .2px;
-      text-shadow: 0 8px 26px rgba(0,0,0,.35);
+      color: #2f1414;
+      text-shadow: 0 12px 34px rgba(84,18,18,.12);
     }
 
     .sub{
       margin:0;
-      color:var(--muted);
+      color: var(--muted);
       font-size: 15px;
-      line-height:1.75;
-      max-width: 70ch;
+      line-height: 1.8;
+      max-width: 78ch;
       white-space: pre-line;
     }
-    .sub b{
-      color: #ffffff;
-    }
+    .sub b{ color: #2f1414; }
 
-    .option:active{
-      transform: translateY(0px) scale(0.995);
-    }
-
-    .heartline{
+    .divider{
       height:1px;
-      background: linear-gradient(90deg, transparent, rgba(244,114,182,.8), rgba(96,165,250,.7), transparent);
-      margin: 0 26px;
+      margin: 0 28px;
+      background: linear-gradient(90deg, transparent, rgba(255,107,138,.75), rgba(255,154,107,.55), rgba(255,211,138,.55), transparent);
     }
 
     main{
-      padding:22px 26px 26px;
+      padding: 22px 28px 10px;
     }
 
-    .grid{
+    .sectionTitle{
+      margin: 0 0 12px;
+      font-size: 14px;
+      letter-spacing:.2px;
+      color: rgba(107,44,44,.95);
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .timeline{
       display:grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap:14px;
-      margin-top: 16px;
+      gap: 12px;
+      margin: 10px 0 18px;
     }
 
-    .option{
-      grid-column: span 12;
-      border:1px solid var(--stroke);
+    .step{
       border-radius: 16px;
-      padding:16px 16px 14px;
-      background: rgba(11,18,32,.55);
-      transition: transform .12s ease, border-color .12s ease, background .12s ease;
-    }
-    .option:hover{
-      transform: translateY(-2px);
-      border-color: rgba(244,114,182,.35);
-      background: rgba(11,18,32,.70);
+      border: 1px solid rgba(255,255,255,.55);
+      background: rgba(255,255,255,.42);
+      padding: 14px 14px 12px;
+      box-shadow: 0 12px 30px rgba(84,18,18,.08);
     }
 
-    .optTitle{
+    .stepHead{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:12px;
-      margin:0 0 6px;
+      gap: 12px;
+      margin: 0 0 6px;
     }
-    .optTitle strong{
-      font-size: 16px;
-      letter-spacing:.2px;
+
+    .stepHead strong{
+      font-size: 15.5px;
+      color: #2f1414;
+      letter-spacing: .15px;
     }
+
     .pill{
-      font-size:12px;
-      color: var(--muted);
-      border:1px solid var(--stroke);
-      padding:6px 10px;
+      font-size: 12px;
+      color: rgba(107,44,44,.95);
+      border:1px solid rgba(255,255,255,.55);
+      padding: 6px 10px;
       border-radius: 999px;
-      background: rgba(0,0,0,.12);
+      background: rgba(255,255,255,.35);
       white-space:nowrap;
     }
 
     .desc{
-      margin:0;
-      color: var(--muted);
-      font-size:14px;
-      line-height:1.55;
+      margin: 0;
+      color: rgba(107,44,44,.95);
+      font-size: 14px;
+      line-height: 1.6;
     }
 
-    .tiny{
-      margin-top:10px;
-      font-size:12.5px;
-      color: rgba(226,232,240,.9);
+    .miniList{
+      margin: 10px 0 0;
+      padding: 0;
+      list-style: none;
+      display:grid;
+      gap: 6px;
+      color: rgba(107,44,44,.95);
+      font-size: 13.5px;
+    }
+    .miniList li{
+      display:flex;
+      align-items:flex-start;
+      gap: 10px;
     }
 
-    .cozy{
+    .highlight{
       margin-top: 14px;
-      padding: 14px 14px 12px;
       border-radius: 16px;
-      border:1px dashed rgba(244,114,182,.45);
-      background: rgba(244,114,182,.08);
+      border: 1px dashed rgba(255,107,138,.55);
+      background: rgba(255,107,138,.10);
+      padding: 14px 14px 12px;
     }
-    .cozy strong{ color: #ffd1e8; }
+    .highlight strong{ color: #2f1414; }
 
-    #extraOption{
-      border:1px dashed rgba(244,114,182,.45);
-      transition: transform .12s ease, border-color .12s ease, background .12s ease;
-    }
-    #extraOption:hover{
-      transform: translateY(-2px);
-      border-color: rgba(244,114,182,.55);
-      background: rgba(244,114,182,.12);
-    }
-    #extraOption.selected{
-      border-color: rgba(52,211,153,.55) !important;
-      background: rgba(52,211,153,.08) !important;
-    }
-
-    
     .footer{
+      padding: 16px 28px 22px;
       display:flex;
       flex-wrap:wrap;
-      gap:10px;
+      gap: 12px;
       align-items:center;
       justify-content:space-between;
-      padding:16px 26px 22px;
+    }
+
+    .note{
+      color: rgba(107,44,44,.90);
+      font-size: 13px;
+      line-height: 1.55;
+      max-width: 70ch;
     }
 
     .buttons{
       display:flex;
       flex-wrap:wrap;
-      gap:10px;
+      gap: 10px;
+      align-items:center;
     }
 
     button{
       cursor:pointer;
-      border:1px solid var(--stroke);
-      background: rgba(0,0,0,.18);
-      color: var(--text);
-      padding:10px 12px;
-      border-radius: 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.6);
+      background: rgba(255,255,255,.48);
+      color: #2f1414;
+      padding: 10px 14px;
       font-size: 14px;
-      transition: transform .12s ease, border-color .12s ease;
+      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+      box-shadow: 0 14px 34px rgba(84,18,18,.10);
     }
     button:hover{
       transform: translateY(-1px);
-      border-color: rgba(96,165,250,.45);
+      border-color: rgba(255,107,138,.40);
+      box-shadow: 0 16px 44px rgba(84,18,18,.12);
     }
 
     .primary{
-      border-color: rgba(244,114,182,.45);
-      background: linear-gradient(135deg, rgba(244,114,182,.22), rgba(96,165,250,.16));
+      background: linear-gradient(135deg, rgba(255,107,138,.26), rgba(255,154,107,.22), rgba(255,211,138,.20));
+      border-color: rgba(255,107,138,.35);
     }
 
-    .note{
-      color: var(--muted);
-      font-size: 13px;
-      line-height:1.5;
-      max-width: 62ch;
-    }
-
-    /* 2 oszlop nagyobb képernyőn */
-    @media (max-width: 480px){
+    /* mobil */
+    @media (max-width: 520px){
       header{ padding: 22px 18px 14px; }
-      main{ padding: 18px 18px 20px; }
+      main{ padding: 18px 18px 10px; }
       .footer{ padding: 14px 18px 18px; }
+      .divider{ margin: 0 18px; }
     }
-    
-    /* kis “csillagok” */
+
+    /* kis csillanások a sarokban */
     .sparkle{
       position:absolute;
-      inset:-40px -40px auto auto;
-      width: 180px;
-      height: 180px;
-      filter: blur(0.2px);
-      opacity:.55;
+      right:-40px;
+      top:-36px;
+      width: 200px;
+      height: 200px;
+      opacity: .55;
       pointer-events:none;
+      filter: blur(.2px);
       background:
-        radial-gradient(circle at 20% 25%, rgba(255,255,255,.55) 0 2px, transparent 3px),
-        radial-gradient(circle at 60% 35%, rgba(255,255,255,.35) 0 2px, transparent 3px),
-        radial-gradient(circle at 35% 70%, rgba(255,255,255,.30) 0 2px, transparent 3px),
-        radial-gradient(circle at 80% 75%, rgba(255,255,255,.25) 0 2px, transparent 3px);
-    }
-
-    .selected{
-      border-color: rgba(52,211,153,.55) !important;
-      background: rgba(52,211,153,.08) !important;
+        radial-gradient(circle at 20% 25%, rgba(255,255,255,.7) 0 2px, transparent 3px),
+        radial-gradient(circle at 60% 35%, rgba(255,255,255,.5) 0 2px, transparent 3px),
+        radial-gradient(circle at 40% 70%, rgba(255,255,255,.45) 0 2px, transparent 3px),
+        radial-gradient(circle at 78% 78%, rgba(255,255,255,.35) 0 2px, transparent 3px);
     }
   </style>
 </head>
 
 <body>
-  <!-- Hóesés vászon -->
-  <canvas id="snow" aria-hidden="true"></canvas>
+  <canvas id="bokeh" aria-hidden="true"></canvas>
 
   <div class="wrap">
     <div class="card">
       <header>
         <div class="sparkle"></div>
-        <div class="tag">🕊️ Meghívó szeretettel</div>
-        <h1>Szeretnék Veled egy nyugodt, szép napot és estét… ❤️</h1>
+        <div class="tag">💗 Meghívó sok szeretettel</div>
+        <h1>Barack Thermal Spa + mi ketten…</h1>
+
         <p class="sub">
-          Tudom, hogy most nehéz napok vannak.
+Arra vágyom, hogy ez most teljesen stresszmentes legyen.
+Bemutatkozás, megfelelés, bármi “kellene” érzés nélkül.
+Csak mi ketten — hogy együtt legyünk, és még jobban megismerjük egymást.
 
-          Nem kell mindig “erősnek” lenni, vannak nehéz napok melyeket az együtt töltött pillanat tesz szebbé.
+Szeretném, ha ez most nem lenne döntéshelyzet.
+Nem kell semmit “jól csinálni”.
+Csak legyünk együtt nyugodtan, szeretettel — és engedjük, hogy minden szépen alakuljon.
 
-          Olyan pillanatok, melyeket együtt élünk meg,
-          mikor édes kis arcodon a csillogó mosolyod látom —
-          tudd, az mindennél többet ér nekem.
-          Ezt szeretném neked adni s <b>biztonságban tudni téged</b>.
-
-          Ha úgy alakul, nem kell hazasietni sem,
-          hiszen akár egy nyugodt, teljes hétvége is kerekedhet belőle.
-
-          Csak azt szeretném, hogy legyen egy kis béke is benned — <b>pont úgy, ahogy Neked jó</b> és ahogy jár Neked.
+Lassan, melegben, csendben…
+egymásban elmerülve. 🤍
         </p>
       </header>
 
-      <div class="heartline"></div>
+      <div class="divider"></div>
 
       <main>
-        <p class="sub" style="margin-top:0">
-          Válassz egyet (vagy mondj egy teljesen más ötletet). Én alkalmazkodom. 😊
-        </p>
+        <div class="sectionTitle">✨ A terv (szépen, egymás után)</div>
 
-        <div class="grid" id="grid">
-          <div class="option" data-key="mom">
-            <div class="optTitle">
-              <strong>1) Anyukádék meglátogatása</strong>
-              <span class="pill">ha van hozzá kedved</span>
+        <div class="timeline">
+          <div class="step">
+            <div class="stepHead">
+              <strong>🚗 Érted megyek</strong>
+              <span class="pill">amikor neked jó</span>
             </div>
-            <p class="desc">
-              Röviden vagy hosszan, nyugisan. Egy kávé/tea, pár kedves szó - vagy több. Együtt, úgy ahogy neked jó.
-              Elemenni kirándulni, szétnézni vagy csak pihenni, amit csak szeretnél, akár bármi mással kiegészíteni.
-            </p>
-            <div class="tiny">🌿 Ha most inkább pihennél, teljesen megértem.</div>
+            <p class="desc">Nyugisan, kapkodás nélkül — csak indulunk.</p>
           </div>
 
-          <div class="option" data-key="home">
-            <div class="optTitle">
-              <strong>2) Miskolc: fények + forralt bor + kandalló + Lillafüred</strong>
-              <span class="pill">meleg & kuckós</span>
+          <div class="step">
+            <div class="stepHead">
+              <strong>🏙️ Szolnok</strong>
+              <span class="pill">kiszökés kettesben</span>
             </div>
-            <p class="desc">
-              Egy séta karácsonyi fények között, aztán kuckózás. Ha úgy érzed, bemutatkozás is lehet, hiszen anyáék itthon lesznek
-              de <b>csak ha te is akarod</b>. Akár egy szaunázással, kis wellnessel feldobva a Lillafüredi kastélyban! De minden rád van bízva.
-            </p>
-            <div class="tiny">🔥 Ha az “ismerkedés” most stressz, akkor ezt inkább későbbre is tehetjük. De az összes program játszhat ismerkedés nélkül is!</div>
+            <p class="desc">Egy nap, ami csak rólunk szól.</p>
           </div>
 
-          <div class="option" data-key="szolnok">
-            <div class="optTitle">
-              <strong>3) Szolnok: csak mi ketten, úgy ahogy eddig</strong>
-              <span class="pill">csend & nyugi</span>
+          <div class="step">
+            <div class="stepHead">
+              <strong>♨️ Barack Thermal Spa</strong>
+              <span class="pill">meleg & nyugalom</span>
             </div>
-            <p class="desc">
-              Semmi külső zaj. Egy kis séta a városban vagy a természetben, tea, főzés, beszélgetés — amennyi jól esik. Összebújni és lenni, masszázzsal és jó sok simogatással és puszival!
-            </p>
-            <div class="tiny">🕯️ Lágyan csak együtt ketten.</div>
+
+            <ul class="miniList">
+              <li>🔥 <span>szauна</span></li>
+              <li>💦 <span>meleg medence</span></li>
+              <li>🌫️ <span>gőzkabin</span></li>
+              <li>✨ <span>pihenés</span></li>
+            </ul>
           </div>
 
-          <div class="option" data-key="day">
-            <div class="optTitle">
-              <strong>4) Egyéb: Csak egész nap együtt valahol, bárhol!</strong>
-              <span class="pill">rugalmas</span>
+          <div class="step">
+            <div class="stepHead">
+              <strong>🌊 Séta a Tisza-parton</strong>
+              <span class="pill">lassan, ketten</span>
+            </div>
+            <p class="desc">Csak menni egyet… kéz a kézben.</p>
+          </div>
+
+          <div class="step">
+            <div class="stepHead">
+              <strong>🕯️ Este: gyertyafényes vacsora</strong>
+              <span class="pill">kuckózós</span>
             </div>
             <p class="desc">
-              Kitaláljuk közösen: rövidebben vagy hosszabban, meleg helyen vagy éppen valahol.
-              Nem kell fázni: lehet beltéri is. Akár Letiékkel együtt is, ahogyan csak szeretnéd!
+              Főzök Neked valami finomat — olyat, amit szeretsz.
+              A “menüt” együtt találjuk ki, hogy biztosan a kedvenced legyen. 🤍
             </p>
-            <div class="tiny">☕ Ha hideg van, csinálunk “meleg útvonalat”.</div>
+          </div>
+
+          <div class="step">
+            <div class="stepHead">
+              <strong>🌙 Együtt alvás</strong>
+              <span class="pill">romantikus lezárás</span>
+            </div>
+            <p class="desc">
+              Ölelés, közelség, nyugalom… és egymás mellett elalvás. 🫶
+            </p>
           </div>
         </div>
 
-        <div class="cozy" id="extraOption" data-extra="true" style="cursor:pointer;">
-          <div class="optTitle" style="margin:0;">
-            <strong>+ Egy extra</strong>
-            <span class="pill" id="extraPill">opcionális</span>
-          </div>
-          <p class="desc" style="margin:8px 0 0;">
-            ha volna kedved, alhatunk is együtt… csak ölelés, csók, egymás karjában elveszve. Ahogyan érzed! 🫶
+        <div class="highlight">
+          <p class="desc" style="margin:0">
+            <strong>Fontos:</strong> semmi sem kötelező.
+            Nem szeretném, hogy stresszes legyen — csak jó.
+            A nap úgy alakul, ahogy Neked a legkönnyebb.
           </p>
-        <div class="tiny" id="extraHint">Kattints ide, ha szeretnéd ezt is beletenni a másolt üzenetbe.</div>
-      </div>
-
-
-        <p class="note" style="margin-top:16px">
-          Ha most csak annyit mondasz: “ma nem tudom” — az is rendben van.
-          Akkor is itt vagyok, és majd csinálunk egy szebb napot. 🌙
-        </p>
+        </div>
       </main>
 
-      <div class="heartline"></div>
+      <div class="divider"></div>
 
       <div class="footer">
         <div class="buttons">
-          <button class="primary" id="copyBtn">📋 Választás kimásolása</button>
-          <button id="resetBtn">↩️ Nincs döntés most</button>
+          <button class="primary" id="yesBtn">💗 Igen, menjünk</button>
+          <button id="copyBtn">📋 Válasz kimásolása</button>
         </div>
+
         <div class="note">
-          Tipp: kattints egy opcióra, aztán “Választás kimásolása” — és be tudod küldeni üzenetben.
+          Ha rányomsz az “Igen, menjünk”-re, kapok egy kis választ ❤️
+          (a “Válasz kimásolása” gombbal üzenetbe is be tudod küldeni)
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    // --- HÓESÉS (finom, mobilbarát) ---
-    const canvas = document.getElementById("snow");
+    // --- BOKEH / CSILLOGÓ EFFEKT (finom, nyugtató) ---
+    const canvas = document.getElementById("bokeh");
     const ctx = canvas.getContext("2d");
 
     let w, h, dpr;
@@ -417,127 +417,89 @@
       canvas.style.height = h + "px";
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
-    window.addEventListener("resize", resize, { passive: true });
+    window.addEventListener("resize", resize, { passive:true });
     resize();
 
-    const flakes = [];
     function rand(min, max){ return Math.random() * (max - min) + min; }
 
-    function initFlakes(){
-      flakes.length = 0;
-      const count = Math.min(120, Math.floor((w*h)/9000)); // adaptív
+    const dots = [];
+    function initDots(){
+      dots.length = 0;
+      const count = Math.min(70, Math.floor((w*h)/18000));
       for(let i=0;i<count;i++){
-        flakes.push({
-          x: rand(0, w),
-          y: rand(0, h),
-          r: rand(0.6, 2.2),
-          vy: rand(0.5, 1.7),
-          vx: rand(-0.35, 0.35),
-          a: rand(0.3, 0.9)
+        dots.push({
+          x: rand(0,w),
+          y: rand(0,h),
+          r: rand(6, 22),
+          vx: rand(-0.08, 0.08),
+          vy: rand(-0.06, 0.06),
+          a: rand(0.08, 0.18),
+          // meleg színek váltogatva
+          t: Math.floor(rand(0,3))
         });
       }
     }
-    initFlakes();
-    window.addEventListener("resize", initFlakes, { passive: true });
+    initDots();
+    window.addEventListener("resize", initDots, { passive:true });
+
+    function colorFor(t, a){
+      if(t===0) return `rgba(255,107,138,${a})`; // rózsás
+      if(t===1) return `rgba(255,154,107,${a})`; // barack
+      return `rgba(255,211,138,${a})`; // arany
+    }
 
     function step(){
       ctx.clearRect(0,0,w,h);
-      for(const f of flakes){
-        f.x += f.vx;
-        f.y += f.vy;
 
-        // enyhe "sodródás"
-        f.x += Math.sin((f.y / 60)) * 0.15;
+      for(const d of dots){
+        d.x += d.vx;
+        d.y += d.vy;
 
-        if(f.y > h + 10){
-          f.y = -10;
-          f.x = rand(0, w);
-        }
-        if(f.x < -10) f.x = w + 10;
-        if(f.x > w + 10) f.x = -10;
+        // körbejárás
+        if(d.x < -40) d.x = w + 40;
+        if(d.x > w + 40) d.x = -40;
+        if(d.y < -40) d.y = h + 40;
+        if(d.y > h + 40) d.y = -40;
 
+        const grd = ctx.createRadialGradient(d.x, d.y, 0, d.x, d.y, d.r);
+        grd.addColorStop(0, colorFor(d.t, d.a));
+        grd.addColorStop(1, "rgba(255,255,255,0)");
+
+        ctx.fillStyle = grd;
         ctx.beginPath();
-        ctx.fillStyle = `rgba(255,255,255,${f.a})`;
-        ctx.arc(f.x, f.y, f.r, 0, Math.PI*2);
+        ctx.arc(d.x, d.y, d.r, 0, Math.PI*2);
         ctx.fill();
       }
+
       requestAnimationFrame(step);
     }
     step();
 
-    // --- OPciók kiválasztása + másolás ---
-    const options = document.querySelectorAll(".option[data-key]");
-    let selectedKey = null;
+    // --- GOMBOK ---
+    const yesBtn = document.getElementById("yesBtn");
+    const copyBtn = document.getElementById("copyBtn");
 
-    const labels = {
-      mom: "1) Anyukádék meglátogatása",
-      home: "2) Miskolc: fények + forralt bor + kandalló",
-      szolnok: "3) Szolnok: csak mi ketten",
-      day: "4) Egy egész nap együtt valahol"
-    };
-
-    let extraSelected = false;
-
-    const extraEl = document.getElementById("extraOption");
-    const extraPill = document.getElementById("extraPill");
-    const extraHint = document.getElementById("extraHint");
-
-    extraEl.addEventListener("click", () => {
-      extraSelected = !extraSelected;
-      extraEl.classList.toggle("selected", extraSelected);
-
-      if (extraSelected) {
-        extraPill.textContent = "kiválasztva ✅";
-        extraHint.textContent = "Benne lesz a másolt üzenetben.";
-      } else {
-        extraPill.textContent = "opcionális";
-        extraHint.textContent = "Kattints ide, ha szeretnéd ezt is beletenni a másolt üzenetbe.";
-      }
+    yesBtn.addEventListener("click", () => {
+      alert("💗 De jó… akkor menjünk. 🤍");
     });
 
-    function setSelected(key){
-      selectedKey = key;
-      options.forEach(o => o.classList.toggle("selected", o.dataset.key === key));
-    }
+    copyBtn.addEventListener("click", async () => {
+      const text =
+`Szia 💗
 
-    options.forEach(o => {
-      o.addEventListener("click", () => setSelected(o.dataset.key));
-    });
+Igen, menjünk.
 
-    document.getElementById("resetBtn").addEventListener("click", () => {
-      selectedKey = null;
-      options.forEach(o => o.classList.remove("selected"));
-      alert("Rendben. Nincs döntés most. 🤍");
-    });
+Nagyon tetszik a terv: Szolnok + Barack Thermal + séta + gyertyafényes vacsora + együtt alvás. 🌙
 
-    document.getElementById("copyBtn").addEventListener("click", async () => {
-      let text = "Szia ❤️\n\n";
+Semmi stressz, csak mi ketten. 🤍`;
 
-      if (selectedKey) {
-    // Van konkrét választás
-        if (selectedKey) {
-          text += "Választásom: " + labels[selectedKey] + "\n";
-        }
-
-        if (extraSelected) {
-          text += "\n+ Ha jólesik: aludhatunk is együtt, csak ölelés és nyugi, semmi nyomás. 🫶";
-        }
-      } else {
-    // Nincs döntés
-        text += "Most nincs konkrét döntésem.\n";
-        text += "Bármi jó, ami neked a legkönnyebb.\n";
-      }
-
-      text += "\n\nItt vagyok. 🌙";
-
-      try {
+      try{
         await navigator.clipboard.writeText(text);
         alert("Kimásolva! Küldheted neki üzenetben. 😊");
-      } catch (e) {
+      }catch(e){
         prompt("Másold ki innen:", text);
       }
     });
-
   </script>
 </body>
 </html>
