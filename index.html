@@ -7,22 +7,22 @@
 
   <style>
     :root{
-      /* meleg, barackos-rózsás paletta */
-      --bg1:#fff1ea;
-      --bg2:#ffd7c7;
-      --bg3:#f7b2a1;
-      --ink:#3b1d1d;
-      --muted:#6b2c2c;
-      --card: rgba(255,255,255,.55);
-      --stroke: rgba(255,255,255,.45);
-      --shadow: 0 24px 80px rgba(84,18,18,.25);
+      /* SÖTÉTEBB, MELEGEBB ALAP */
+      --bg1:#2a0f14;   /* mély bordó */
+      --bg2:#4a1620;   /* meleg vöröses */
+      --bg3:#6b2a2a;   /* barackos barna */
+
+      --ink:#fff7f2;
+      --muted: rgba(255, 239, 232, .82);
+
+      --card: rgba(255,255,255,.08);
+      --stroke: rgba(255,255,255,.14);
+      --shadow: 0 28px 90px rgba(0,0,0,.55);
       --radius: 22px;
 
       --accent:#ff6b8a;
       --accent2:#ff9a6b;
       --accent3:#ffd38a;
-
-      --ok:#22c55e;
     }
 
     *{ box-sizing:border-box; }
@@ -37,14 +37,15 @@
       justify-content:center;
       padding: 24px;
 
+      /* SÖTÉT háttér + meleg glow foltok */
       background:
-        radial-gradient(900px 520px at 15% 10%, rgba(255,107,138,.20), transparent 60%),
-        radial-gradient(900px 520px at 85% 15%, rgba(255,154,107,.20), transparent 60%),
-        radial-gradient(1100px 620px at 50% 95%, rgba(255,211,138,.18), transparent 60%),
-        linear-gradient(160deg, var(--bg1), var(--bg2) 45%, var(--bg3));
+        radial-gradient(1100px 700px at 15% 10%, rgba(255,107,138,.22), transparent 60%),
+        radial-gradient(1200px 780px at 85% 15%, rgba(255,154,107,.18), transparent 60%),
+        radial-gradient(1200px 800px at 50% 95%, rgba(255,211,138,.14), transparent 60%),
+        linear-gradient(160deg, var(--bg1), var(--bg2) 55%, var(--bg3));
     }
 
-    /* csillogós bokeh réteg */
+    /* BOKEH réteg — erősebb + blend */
     #bokeh{
       position: fixed;
       inset: 0;
@@ -52,7 +53,9 @@
       height: 100vh;
       pointer-events:none;
       z-index: 1;
-      opacity: .75;
+      opacity: .85;
+      mix-blend-mode: screen; /* ettől “fényként” viselkedik */
+      filter: blur(.2px);
     }
 
     .wrap{
@@ -64,24 +67,35 @@
     .card{
       position: relative;
       border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(255,255,255,.62), rgba(255,255,255,.36));
-      border: 1px solid rgba(255,255,255,.55);
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+      border: 1px solid rgba(255,255,255,.14);
       box-shadow: var(--shadow);
       overflow: hidden;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
     }
 
-    /* glow a kártya körül */
+    /* ERŐSEBB glow a fő kártyán */
     .card::before{
       content:"";
       position:absolute;
       inset:-2px;
       border-radius: var(--radius);
       background:
-        radial-gradient(700px 220px at 20% 0%, rgba(255,107,138,.26), transparent 62%),
-        radial-gradient(700px 220px at 80% 0%, rgba(255,154,107,.22), transparent 62%),
-        radial-gradient(700px 260px at 50% 110%, rgba(255,211,138,.18), transparent 60%);
-      filter: blur(0.2px);
+        radial-gradient(800px 260px at 20% 0%, rgba(255,107,138,.26), transparent 62%),
+        radial-gradient(800px 260px at 80% 0%, rgba(255,154,107,.20), transparent 62%),
+        radial-gradient(900px 360px at 50% 115%, rgba(255,211,138,.16), transparent 60%);
+      pointer-events:none;
+      z-index:0;
+    }
+    /* finom belső fény */
+    .card::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius: var(--radius);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.12),
+        inset 0 0 0 1px rgba(255,255,255,.08);
       pointer-events:none;
       z-index:0;
     }
@@ -98,12 +112,12 @@
       gap:10px;
       padding: 8px 12px;
       border-radius: 999px;
-      border:1px solid rgba(255,255,255,.55);
-      background: rgba(255,255,255,.40);
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.18);
       font-size: 13px;
-      color: rgba(107,44,44,.95);
+      color: rgba(255,239,232,.92);
       letter-spacing:.2px;
-      box-shadow: 0 10px 26px rgba(84,18,18,.08);
+      box-shadow: 0 14px 40px rgba(0,0,0,.35);
     }
 
     h1{
@@ -111,24 +125,29 @@
       font-size: clamp(26px, 4.2vw, 40px);
       line-height: 1.12;
       letter-spacing: .2px;
-      color: #2f1414;
-      text-shadow: 0 12px 34px rgba(84,18,18,.12);
+      color: #fff7f2;
+      text-shadow: 0 18px 50px rgba(0,0,0,.55);
     }
 
     .sub{
       margin:0;
       color: var(--muted);
       font-size: 15px;
-      line-height: 1.8;
+      line-height: 1.85;
       max-width: 78ch;
       white-space: pre-line;
     }
-    .sub b{ color: #2f1414; }
+    .sub b{ color: #ffffff; }
 
     .divider{
       height:1px;
       margin: 0 28px;
-      background: linear-gradient(90deg, transparent, rgba(255,107,138,.75), rgba(255,154,107,.55), rgba(255,211,138,.55), transparent);
+      background: linear-gradient(90deg, transparent,
+        rgba(255,107,138,.70),
+        rgba(255,154,107,.55),
+        rgba(255,211,138,.55),
+        transparent);
+      opacity: .9;
     }
 
     main{
@@ -139,7 +158,7 @@
       margin: 0 0 12px;
       font-size: 14px;
       letter-spacing:.2px;
-      color: rgba(107,44,44,.95);
+      color: rgba(255,239,232,.92);
       display:flex;
       align-items:center;
       gap:10px;
@@ -151,12 +170,36 @@
       margin: 10px 0 18px;
     }
 
+    /* STEP kártyák: glowing keret */
     .step{
+      position: relative;
       border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.55);
-      background: rgba(255,255,255,.42);
       padding: 14px 14px 12px;
-      box-shadow: 0 12px 30px rgba(84,18,18,.08);
+      background: rgba(0,0,0,.16);
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 16px 40px rgba(0,0,0,.35);
+      overflow: hidden;
+    }
+    .step::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      border-radius: 16px;
+      background: linear-gradient(90deg,
+        rgba(255,107,138,.35),
+        rgba(255,154,107,.25),
+        rgba(255,211,138,.18));
+      opacity:.55;
+      filter: blur(10px);
+      pointer-events:none;
+    }
+    .step::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius: 16px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+      pointer-events:none;
     }
 
     .stepHead{
@@ -169,25 +212,26 @@
 
     .stepHead strong{
       font-size: 15.5px;
-      color: #2f1414;
+      color: #fff7f2;
       letter-spacing: .15px;
+      text-shadow: 0 10px 30px rgba(0,0,0,.45);
     }
 
     .pill{
       font-size: 12px;
-      color: rgba(107,44,44,.95);
-      border:1px solid rgba(255,255,255,.55);
+      color: rgba(255,239,232,.88);
+      border:1px solid rgba(255,255,255,.14);
       padding: 6px 10px;
       border-radius: 999px;
-      background: rgba(255,255,255,.35);
+      background: rgba(0,0,0,.18);
       white-space:nowrap;
     }
 
     .desc{
       margin: 0;
-      color: rgba(107,44,44,.95);
+      color: rgba(255,239,232,.82);
       font-size: 14px;
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
     .miniList{
@@ -196,7 +240,7 @@
       list-style: none;
       display:grid;
       gap: 6px;
-      color: rgba(107,44,44,.95);
+      color: rgba(255,239,232,.85);
       font-size: 13.5px;
     }
     .miniList li{
@@ -208,11 +252,12 @@
     .highlight{
       margin-top: 14px;
       border-radius: 16px;
-      border: 1px dashed rgba(255,107,138,.55);
+      border: 1px dashed rgba(255,107,138,.45);
       background: rgba(255,107,138,.10);
       padding: 14px 14px 12px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.35);
     }
-    .highlight strong{ color: #2f1414; }
+    .highlight strong{ color: #ffffff; }
 
     .footer{
       padding: 16px 28px 22px;
@@ -224,7 +269,7 @@
     }
 
     .note{
-      color: rgba(107,44,44,.90);
+      color: rgba(255,239,232,.82);
       font-size: 13px;
       line-height: 1.55;
       max-width: 70ch;
@@ -240,48 +285,47 @@
     button{
       cursor:pointer;
       border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.6);
-      background: rgba(255,255,255,.48);
-      color: #2f1414;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.20);
+      color: #fff7f2;
       padding: 10px 14px;
       font-size: 14px;
       transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
-      box-shadow: 0 14px 34px rgba(84,18,18,.10);
+      box-shadow: 0 18px 48px rgba(0,0,0,.40);
     }
     button:hover{
       transform: translateY(-1px);
-      border-color: rgba(255,107,138,.40);
-      box-shadow: 0 16px 44px rgba(84,18,18,.12);
+      border-color: rgba(255,107,138,.30);
+      box-shadow: 0 20px 60px rgba(0,0,0,.48);
     }
 
     .primary{
-      background: linear-gradient(135deg, rgba(255,107,138,.26), rgba(255,154,107,.22), rgba(255,211,138,.20));
-      border-color: rgba(255,107,138,.35);
+      background: linear-gradient(135deg, rgba(255,107,138,.30), rgba(255,154,107,.22), rgba(255,211,138,.16));
+      border-color: rgba(255,107,138,.32);
     }
 
-    /* mobil */
+    /* kis csillanások */
+    .sparkle{
+      position:absolute;
+      right:-40px;
+      top:-36px;
+      width: 220px;
+      height: 220px;
+      opacity: .55;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 20% 25%, rgba(255,255,255,.8) 0 2px, transparent 3px),
+        radial-gradient(circle at 60% 35%, rgba(255,255,255,.55) 0 2px, transparent 3px),
+        radial-gradient(circle at 40% 70%, rgba(255,255,255,.50) 0 2px, transparent 3px),
+        radial-gradient(circle at 78% 78%, rgba(255,255,255,.38) 0 2px, transparent 3px);
+      filter: blur(.2px);
+    }
+
     @media (max-width: 520px){
       header{ padding: 22px 18px 14px; }
       main{ padding: 18px 18px 10px; }
       .footer{ padding: 14px 18px 18px; }
       .divider{ margin: 0 18px; }
-    }
-
-    /* kis csillanások a sarokban */
-    .sparkle{
-      position:absolute;
-      right:-40px;
-      top:-36px;
-      width: 200px;
-      height: 200px;
-      opacity: .55;
-      pointer-events:none;
-      filter: blur(.2px);
-      background:
-        radial-gradient(circle at 20% 25%, rgba(255,255,255,.7) 0 2px, transparent 3px),
-        radial-gradient(circle at 60% 35%, rgba(255,255,255,.5) 0 2px, transparent 3px),
-        radial-gradient(circle at 40% 70%, rgba(255,255,255,.45) 0 2px, transparent 3px),
-        radial-gradient(circle at 78% 78%, rgba(255,255,255,.35) 0 2px, transparent 3px);
     }
   </style>
 </head>
@@ -298,7 +342,7 @@
 
         <p class="sub">
 Arra vágyom, hogy ez most teljesen stresszmentes legyen.
-Bemutatkozás, megfelelés, bármi “kellene” érzés nélkül.
+Bemutatkozás, megfelelés, bármi “kellemetlen” érzés nélkül.
 Csak mi ketten — hogy együtt legyünk, és még jobban megismerjük egymást.
 
 Szeretném, ha ez most nem lenne döntéshelyzet.
@@ -313,7 +357,7 @@ egymásban elmerülve. 🤍
       <div class="divider"></div>
 
       <main>
-        <div class="sectionTitle">✨ A terv (szépen, egymás után)</div>
+        <div class="sectionTitle">✨ A terv </div>
 
         <div class="timeline">
           <div class="step">
@@ -337,9 +381,8 @@ egymásban elmerülve. 🤍
               <strong>♨️ Barack Thermal Spa</strong>
               <span class="pill">meleg & nyugalom</span>
             </div>
-
             <ul class="miniList">
-              <li>🔥 <span>szauна</span></li>
+              <li>🔥 <span>szauna</span></li>
               <li>💦 <span>meleg medence</span></li>
               <li>🌫️ <span>gőzkabin</span></li>
               <li>✨ <span>pihenés</span></li>
@@ -370,9 +413,7 @@ egymásban elmerülve. 🤍
               <strong>🌙 Együtt alvás</strong>
               <span class="pill">romantikus lezárás</span>
             </div>
-            <p class="desc">
-              Ölelés, közelség, nyugalom… és egymás mellett elalvás. 🫶
-            </p>
+            <p class="desc">Ölelés, közelség, nyugalom… és egymás mellett elalvás. 🫶</p>
           </div>
         </div>
 
@@ -394,15 +435,14 @@ egymásban elmerülve. 🤍
         </div>
 
         <div class="note">
-          Ha rányomsz az “Igen, menjünk”-re, kapok egy kis választ ❤️
-          (a “Válasz kimásolása” gombbal üzenetbe is be tudod küldeni)
+          Tipp: ha nem akarsz semmit gépelni, a “Válasz kimásolása” gombbal egy szép üzenetet azonnal be tudsz küldeni.
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    // --- BOKEH / CSILLOGÓ EFFEKT (finom, nyugtató) ---
+    // --- BOKEH: erősebb, láthatóbb, melegebb ---
     const canvas = document.getElementById("bokeh");
     const ctx = canvas.getContext("2d");
 
@@ -425,17 +465,17 @@ egymásban elmerülve. 🤍
     const dots = [];
     function initDots(){
       dots.length = 0;
-      const count = Math.min(70, Math.floor((w*h)/18000));
+      const count = Math.min(95, Math.floor((w*h)/15000)); // több pötty
       for(let i=0;i<count;i++){
         dots.push({
           x: rand(0,w),
           y: rand(0,h),
-          r: rand(6, 22),
-          vx: rand(-0.08, 0.08),
-          vy: rand(-0.06, 0.06),
-          a: rand(0.08, 0.18),
-          // meleg színek váltogatva
-          t: Math.floor(rand(0,3))
+          r: rand(10, 34),         // nagyobb körök
+          vx: rand(-0.11, 0.11),
+          vy: rand(-0.08, 0.08),
+          a: rand(0.10, 0.22),      // erősebb fény
+          t: Math.floor(rand(0,3)),
+          tw: rand(0.6, 1.8)        // twinkle sebesség
         });
       }
     }
@@ -443,27 +483,32 @@ egymásban elmerülve. 🤍
     window.addEventListener("resize", initDots, { passive:true });
 
     function colorFor(t, a){
-      if(t===0) return `rgba(255,107,138,${a})`; // rózsás
-      if(t===1) return `rgba(255,154,107,${a})`; // barack
-      return `rgba(255,211,138,${a})`; // arany
+      if(t===0) return `rgba(255,107,138,${a})`;
+      if(t===1) return `rgba(255,154,107,${a})`;
+      return `rgba(255,211,138,${a})`;
     }
 
+    let tick = 0;
     function step(){
+      tick += 0.01;
       ctx.clearRect(0,0,w,h);
 
       for(const d of dots){
         d.x += d.vx;
         d.y += d.vy;
 
-        // körbejárás
-        if(d.x < -40) d.x = w + 40;
-        if(d.x > w + 40) d.x = -40;
-        if(d.y < -40) d.y = h + 40;
-        if(d.y > h + 40) d.y = -40;
+        if(d.x < -60) d.x = w + 60;
+        if(d.x > w + 60) d.x = -60;
+        if(d.y < -60) d.y = h + 60;
+        if(d.y > h + 60) d.y = -60;
+
+        // twinkle (enyhe pulzálás)
+        const pulse = 0.65 + 0.35 * Math.sin(tick * d.tw + d.x * 0.002);
+        const a = d.a * pulse;
 
         const grd = ctx.createRadialGradient(d.x, d.y, 0, d.x, d.y, d.r);
-        grd.addColorStop(0, colorFor(d.t, d.a));
-        grd.addColorStop(1, "rgba(255,255,255,0)");
+        grd.addColorStop(0, colorFor(d.t, a));
+        grd.addColorStop(1, "rgba(0,0,0,0)");
 
         ctx.fillStyle = grd;
         ctx.beginPath();
@@ -489,7 +534,7 @@ egymásban elmerülve. 🤍
 
 Igen, menjünk.
 
-Nagyon tetszik a terv: Szolnok + Barack Thermal + séta + gyertyafényes vacsora + együtt alvás. 🌙
+Nagyon tetszik a terv: Szolnok + Barack Thermal + séta a Tisza-parton + gyertyafényes vacsora + együtt alvás. 🌙
 
 Semmi stressz, csak mi ketten. 🤍`;
 
