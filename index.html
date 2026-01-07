@@ -480,22 +480,45 @@
 
   <script>
     // --- BOKEH: erősebb, láthatóbb, melegebb ---
-    const canvas = document.getElementById("bokeh");
-    const ctx = canvas.getContext("2d");
+const canvas = document.getElementById("bokeh");
+const ctx = canvas.getContext("2d");
 
-    let w, h, dpr;
-    function resize(){
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      w = window.innerWidth;
-      h = window.innerHeight;
-      canvas.width = Math.floor(w * dpr);
-      canvas.height = Math.floor(h * dpr);
-      canvas.style.width = w + "px";
-      canvas.style.height = h + "px";
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    }
-    window.addEventListener("resize", resize, { passive:true });
+let w, h, dpr;
+let resizeRaf = null;
+
+function resize(){
+  dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  // stabilabb mobilon, mint innerWidth/innerHeight
+  w = document.documentElement.clientWidth;
+  h = document.documentElement.clientHeight;
+
+  canvas.width = Math.floor(w * dpr);
+  canvas.height = Math.floor(h * dpr);
+  canvas.style.width = w + "px";
+  canvas.style.height = h + "px";
+
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
+function scheduleResize(){
+  if (resizeRaf) return;
+  resizeRaf = requestAnimationFrame(() => {
+    resizeRaf = null;
     resize();
+  });
+}
+
+window.addEventListener("resize", scheduleResize, { passive:true });
+window.addEventListener("orientationchange", scheduleResize, { passive:true });
+
+// iOS / mobil: viewport változás scroll közben is
+if (window.visualViewport) {
+  visualViewport.addEventListener("resize", scheduleResize, { passive:true });
+  visualViewport.addEventListener("scroll", scheduleResize, { passive:true });
+}
+
+resize();
 
     function rand(min, max){ return Math.random() * (max - min) + min; }
 
